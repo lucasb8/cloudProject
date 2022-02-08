@@ -10,38 +10,7 @@ export class FilterableContactTable extends React.Component {
     // FilterableContactTable is the owner of the state as the filterText is needed in both nodes (searchbar and table) that are below in the hierarchy tree.
     this.state = {
       filterText: "",
-      contacts: [
-        {
-          key: 1,
-          name: "Tom Jackson",
-          phone: "555-444-333",
-          email: "tom@gmail.com",
-        },
-        {
-          key: 2,
-          name: "Mike James",
-          phone: "555-777-888",
-          email: "mikejames@gmail.com",
-        },
-        {
-          key: 3,
-          name: "Janet Larson",
-          phone: "555-222-111",
-          email: "janetlarson@gmail.com",
-        },
-        {
-          key: 4,
-          name: "Clark Thompson",
-          phone: "555-444-333",
-          email: "clark123@gmail.com",
-        },
-        {
-          key: 5,
-          name: "Emma Pager",
-          phone: "555-444-333",
-          email: "emma1page@gmail.com",
-        },
-      ],
+      contacts: [...props.contacts],
     };
     this.handleFilterTextInput = this.handleFilterTextInput.bind(this);
     this.addContact = this.addContact.bind(this);

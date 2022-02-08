@@ -6,7 +6,7 @@ export class ContactTable extends React.Component {
   render() {
     var rows = [];
     this.props.contacts.forEach((contact) => {
-      if (contact.name.indexOf(this.props.filterText) === -1) {
+      if (contact.fName.indexOf(this.props.filterText) === -1) {
         return;
       }
       rows.push(<ContactRow key={contact.key} contact={contact} />);
@@ -16,10 +16,10 @@ export class ContactTable extends React.Component {
         <thead>
           <tr>
             <th>
-              <i className="fa fa-fw fa-user"></i>Name
+              <i className="fa fa-fw fa-user"></i>First name
             </th>
             <th>
-              <i className="fa fa-fw fa-phone"></i>Phone
+              <i className="fa fa-fw fa-user"></i>Last name
             </th>
             <th>
               <i className="fa fa-fw fa-envelope"></i>Email

@@ -5,29 +5,34 @@ import React from "react";
 import { FilterableContactTable } from "./components/FilterableContactTable";
 
 var CONTACTS = [
-  { key: 1, name: "Tom Jackson", phone: "555-444-333", email: "tom@gmail.com" },
+  {
+    key: 1,
+    fName: "Tom",
+    lName: "Jackson",
+    email: "tom@gmail.com",
+  },
   {
     key: 2,
-    name: "Mike James",
-    phone: "555-777-888",
+    fName: "Mike",
+    lName: "James",
     email: "mikejames@gmail.com",
   },
   {
     key: 3,
-    name: "Janet Larson",
-    phone: "555-222-111",
+    fName: "Janet",
+    lName: "Larson",
     email: "janetlarson@gmail.com",
   },
   {
     key: 4,
-    name: "Clark Thompson",
-    phone: "555-444-333",
+    fName: "Clark",
+    lName: "Thompson",
     email: "clark123@gmail.com",
   },
   {
     key: 5,
-    name: "Emma Page",
-    phone: "555-444-333",
+    fName: "Emma",
+    lName: "Page",
     email: "emma1page@gmail.com",
   },
 ];
