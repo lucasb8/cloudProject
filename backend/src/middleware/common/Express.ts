@@ -33,9 +33,15 @@ export class ExpressConfig {
     });
   }
 
-  clientErrorHandler(err: any, res: Response): void {
+  clientErrorHandler(
+    err: any,
+    _: unknown,
+    res: Response,
+    next: express.NextFunction
+  ): void {
     if (err.hasOwnProperty("thrown")) {
       res.status(err["status"]).send({ error: err.message });
     }
+    next();
   }
 }

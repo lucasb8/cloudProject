@@ -1,5 +1,6 @@
 import React from "react";
 
+import { DbService } from "./../services/DbService";
 import { ContactTable } from "./ContactTable";
 import { NewContactRow } from "./NewContactRow";
 import { SearchBar } from "./SearchBar";
@@ -7,21 +8,33 @@ import { SearchBar } from "./SearchBar";
 export class FilterableContactTable extends React.Component {
   constructor(props) {
     super(props);
+
     // FilterableContactTable is the owner of the state as the filterText is needed in both nodes (searchbar and table) that are below in the hierarchy tree.
     this.state = {
       filterText: "",
-      contacts: [...props.contacts],
+      contacts: [],
     };
+
+    DbService.getAllContacts().then((contacts) =>
+      this.setState((prevState) => ({ ...prevState, contacts }))
+    );
+
     this.handleFilterTextInput = this.handleFilterTextInput.bind(this);
     this.addContact = this.addContact.bind(this);
   }
 
   addContact(contact) {
-    var timestamp = new Date().getTime();
-    contact["key"] = timestamp;
-    console.log("BEFORE: this.state.contacts: " + this.state.contacts.length);
+    DbService.addNewContact(contact.email, contact.firstName, contact.lastName);
     // update the state object
     this.state.contacts.push(contact);
+    // set the state
+    this.setState({ contacts: this.state.contacts });
+  }
+
+  deleteAllContact() {
+    DbService.deleteAllContact();
+    // update the state object
+    this.state.contacts.push([]);
     // set the state
     this.setState({ contacts: this.state.contacts });
   }
@@ -37,7 +50,7 @@ export class FilterableContactTable extends React.Component {
   render() {
     return (
       <div>
-        <h1>React Contacts List App</h1>
+        <h1>Contacts List</h1>
         <SearchBar
           filterText={this.state.filterText}
           onFilterTextInput={this.handleFilterTextInput}
@@ -47,6 +60,9 @@ export class FilterableContactTable extends React.Component {
           contacts={this.state.contacts}
           filterText={this.state.filterText}
         />
+        <button onClick={this.deleteAllContact} className="btn btn-danger">
+          Delete all contacts
+        </button>
       </div>
     );
   }

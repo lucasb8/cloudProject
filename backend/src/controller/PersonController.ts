@@ -1,8 +1,8 @@
 import {
   Body,
+  Delete,
   Get,
   JsonController,
-  Param,
   Post,
   UseBefore,
 } from "routing-controllers";
@@ -21,16 +21,17 @@ export class PersonController {
     return this.personService.getAllPerson();
   }
 
-  @Get("/:id")
-  async getPersonById(@Param("id") id: string): Promise<Person> {
-    return this.personService.getPersonById(id);
-  }
-
   @Post("/")
   @UseBefore(PersonMiddleware)
   async insertPerson(
     @Body({ validate: true }) person: Person
   ): Promise<Person> {
     return this.personService.insertPerson(person);
+  }
+
+  @Delete("/")
+  async deleteAllPerson(): Promise<string> {
+    await this.personService.deleteAllPerson();
+    return "";
   }
 }

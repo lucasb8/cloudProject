@@ -9,13 +9,13 @@ export class NewContactRow extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const target = event.target;
-    const fName = target.fName.value;
-    const lName = target.lName.value;
+    const firstName = target.firstName.value;
+    const lastName = target.lastName.value;
     const email = target.email.value;
 
     var contact = {
-      fName: fName,
-      lName: lName,
+      firstName: firstName,
+      lastName: lastName,
       email: email,
     };
     this.props.addContact(contact);
@@ -28,18 +28,18 @@ export class NewContactRow extends React.Component {
           <div className="col-md-3">
             <input
               type="text"
-              name="fName"
+              name="firstName"
               className="form-control"
-              id="fNameInput"
+              id="firstNameInput"
               placeholder="First name"
             />
           </div>
           <div className="col-md-3">
             <input
               type="text"
-              name="lName"
+              name="lastName"
               className="form-control"
-              id="lNameInput"
+              id="lastNameInput"
               placeholder="Last name"
             />
           </div>
