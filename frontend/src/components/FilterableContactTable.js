@@ -15,28 +15,32 @@ export class FilterableContactTable extends React.Component {
       contacts: [],
     };
 
+    this.loadData = this.loadData.bind(this);
+    this.handleFilterTextInput = this.handleFilterTextInput.bind(this);
+    this.addContact = this.addContact.bind(this);
+    this.deleteAllContact = this.deleteAllContact.bind(this);
+  }
+
+  componentDidMount() {
+    this.loadData();
+  }
+
+  loadData() {
     DbService.getAllContacts().then((contacts) =>
       this.setState((prevState) => ({ ...prevState, contacts }))
     );
-
-    this.handleFilterTextInput = this.handleFilterTextInput.bind(this);
-    this.addContact = this.addContact.bind(this);
   }
 
   addContact(contact) {
-    DbService.addNewContact(contact.email, contact.firstName, contact.lastName);
-    // update the state object
-    this.state.contacts.push(contact);
-    // set the state
-    this.setState({ contacts: this.state.contacts });
+    DbService.addNewContact(
+      contact.email,
+      contact.firstName,
+      contact.lastName
+    ).then(() => this.loadData());
   }
 
   deleteAllContact() {
-    DbService.deleteAllContact();
-    // update the state object
-    this.state.contacts.push([]);
-    // set the state
-    this.setState({ contacts: this.state.contacts });
+    DbService.deleteAllContact().then(() => this.loadData());
   }
 
   handleFilterTextInput(filterText) {

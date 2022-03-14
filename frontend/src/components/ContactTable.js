@@ -4,13 +4,12 @@ import { ContactRow } from "./ContactRow";
 
 export class ContactTable extends React.Component {
   render() {
-    var rows = [];
-    this.props.contacts.forEach((contact) => {
-      if (contact.name.firstName.indexOf(this.props.filterText) === -1) {
-        return;
-      }
-      rows.push(<ContactRow key={contact.key} contact={contact} />);
-    });
+    var rows = this.props.contacts
+      .filter(
+        (contact) =>
+          contact.name.firstName.indexOf(this.props.filterText) !== -1
+      )
+      .map((contact) => <ContactRow key={contact.id} contact={contact} />);
     return (
       <table className="table table-hover">
         <thead>
