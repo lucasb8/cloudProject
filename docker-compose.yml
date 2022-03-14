@@ -1,0 +1,17 @@
+services:
+  frontend:
+    build: frontend/.
+    ports:
+      - "8080:80"
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+  backend:
+    build: backend/.
+    environment:
+      - mongo_host=mongodb
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mongodb

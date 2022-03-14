@@ -1,12 +1,11 @@
 {
   "express": {
-    "port":8081,
-    "debug":5858
+    "port": 8081,
+    "debug": 5858
   },
   "mongo": {
-    "host":"localhost",
-    "port":27017,
-    "database":"typescript"
+    "port": 27017,
+    "database": "typescript"
   },
-  "loglevel":"info"
+  "loglevel": "info"
 }

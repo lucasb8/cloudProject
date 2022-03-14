@@ -1,7 +1,9 @@
+import * as path from "path";
+
+import * as config from "config";
 import { Connection, createConnection } from "typeorm";
-import * as config from 'config';
-import * as path from 'path';
-import { logger } from '../util/logger';
+
+import { logger } from "../util/logger";
 
 export class Mongo {
   public static connection: Connection;
@@ -13,20 +15,18 @@ export class Mongo {
   async createConnection() {
     try {
       Mongo.connection = await createConnection({
-        "type": "mongodb",
-        "host": config.get('mongo.host').toString(),
-        "port": parseInt(config.get('mongo.port')),
-        "database": config.get('mongo.database').toString(),
-        "synchronize": true,
-        "entities": [
-          path.resolve('dist', 'entity') + "/*.js"
-        ]
+        type: "mongodb",
+        host: process.env.mongo_host,
+        port: parseInt(config.get("mongo.port")),
+        database: config.get("mongo.database").toString(),
+        synchronize: true,
+        entities: [path.resolve("dist", "entity") + "/*.js"],
       });
       logger.info(`
       ------------------------------
       Mongodb Connection Established
       ------------------------------
-      `)
+      `);
     } catch (err) {
       logger.error(err);
     }
